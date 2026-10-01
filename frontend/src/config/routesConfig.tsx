@@ -1,7 +1,6 @@
 import type { ReactNode } from "react";
 
-import Login from "../pages/Login/Login";
-import Register from "../pages/Register/Register";
+import Auth from "../pages/Auth/Auth";
 import Dashboard from "../pages/Dashboard/Dashboard";
 
 export interface AppRoute {
@@ -11,13 +10,9 @@ export interface AppRoute {
 
 export const publicRoutes: AppRoute[] = [
   {
-    path: "/login",
-    element: <Login />,
-  },
-  {
-    path: "/register",
-    element: <Register />,
-  },
+    path: "/auth",
+    element: <Auth />,
+  }
 ];
 
 export const privateRoutes: AppRoute[] = [
