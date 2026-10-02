@@ -4,7 +4,7 @@ import { publicRoutes, privateRoutes } from "../config/routesConfig";
 import AppLayout from "../layouts/AppLayout/AppLayout";
 
 function AppRoutes() {
-  const isAuthenticated = false; // temporal
+  const isAuthenticated = true; // temporal
 
   return (
     <BrowserRouter>

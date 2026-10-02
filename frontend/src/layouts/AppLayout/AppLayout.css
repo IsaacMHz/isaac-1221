@@ -1,0 +1,59 @@
+.app-layout {
+  min-height: 100vh;
+
+  background:
+    radial-gradient(
+      circle at 75% 0%,
+      rgba(0, 191, 255, 0.14),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 100% 85%,
+      rgba(0, 100, 220, 0.12),
+      transparent 38%
+    ),
+    linear-gradient(
+      135deg,
+      #07182c 0%,
+      #061326 45%,
+      #050914 100%
+    );
+}
+
+.app-layout > .ant-layout {
+  background: transparent;
+}
+
+.app-layout__sidebar {
+  background: var(--color-surface) !important;
+}
+
+.app-layout__brand {
+  height: var(--navbar-height);
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 0 24px;
+
+  color: var(--color-text);
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.app-layout__brand-icon {
+  color: var(--color-primary);
+  font-size: 24px;
+
+  text-shadow:
+    0 0 8px var(--color-primary),
+    0 0 16px rgba(0, 191, 255, 0.45);
+}
+
+.app-layout__content {
+  min-height: calc(100dvh - var(--navbar-height));
+  padding: 32px;
+
+  background: transparent;
+}

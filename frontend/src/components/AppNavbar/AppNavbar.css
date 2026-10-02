@@ -1,0 +1,79 @@
+.app-navbar {
+  height: var(--navbar-height);
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  padding: 0 32px;
+
+  background:
+    transparent;
+}
+
+.app-navbar__content {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.app-navbar__notification-button {
+  width: 40px;
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: var(--color-text-secondary) !important;
+  font-size: 18px;
+}
+
+.app-navbar__notification-button:hover {
+  color: var(--color-primary) !important;
+  background: var(--color-surface-light) !important;
+}
+
+.app-navbar__user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 6px 10px;
+
+  border-radius: 10px;
+
+  cursor: pointer;
+}
+
+.app-navbar__user:hover {
+  background: var(--color-surface-light);
+}
+
+.app-navbar__avatar {
+  background: var(--color-primary);
+  color: var(--color-background);
+}
+
+.app-navbar__user-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.app-navbar__user-info strong {
+  color: var(--color-text);
+  font-size: 13px;
+}
+
+.app-navbar__user-info span {
+  color: var(--color-text-secondary);
+  font-size: 11px;
+}
+
+.app-navbar__user-arrow {
+  margin-left: 6px;
+
+  color: var(--color-text-secondary);
+  font-size: 10px;
+}

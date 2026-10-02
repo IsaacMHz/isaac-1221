@@ -1,16 +1,33 @@
+import { Layout } from "antd";
 import { Outlet } from "react-router-dom";
+
+import AppMenu from "../../components/AppMenu/AppMenu";
+import AppNavbar from "../../components/AppNavbar/AppNavbar";
+
+import "./AppLayout.css";
+
+const { Sider, Content } = Layout;
 
 const AppLayout = () => {
   return (
-    <div>
-      <header>
-        <h1>SnailRaces</h1>
-      </header>
+    <Layout className="app-layout">
+      <Sider className="app-layout__sidebar" width="var(--sidebar-width)">
+        <div className="app-layout__brand">
+          <span className="app-layout__brand-icon">◉</span>
+          <span>SnailRaces</span>
+        </div>
 
-      <main>
-        <Outlet />
-      </main>
-    </div>
+        <AppMenu />
+      </Sider>
+
+      <Layout>
+        <AppNavbar />
+
+        <Content className="app-layout__content">
+          <Outlet />
+        </Content>
+      </Layout>
+    </Layout>
   );
 };
 

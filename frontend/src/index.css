@@ -1,3 +1,32 @@
+:root {
+  /* Colores principales */
+  --color-background: #050914;
+  --color-surface: #080f1f;
+  --color-surface-light: #0d1d32;
+
+  --color-primary: #00bfff;
+  --color-primary-dark: #008fd1;
+
+  --color-success: #22c55e;
+  --color-error: #ef4444;
+
+  /* Texto */
+  --color-text: #ffffff;
+  --color-text-secondary: #8b93a7;
+
+  /* Bordes */
+  --color-border: #142542;
+
+  /* Layout */
+  --sidebar-width: 260px;
+  --navbar-height: 72px;
+
+  /* Bordes */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -11,5 +40,9 @@ body,
 }
 
 body {
-  background: #050914;
+  background: var(--color-background);
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+  color: var(--color-text);
 }

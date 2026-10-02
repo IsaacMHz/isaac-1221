@@ -1,0 +1,27 @@
+/* Clases de Ant Desing */
+.sidebar-menu{
+  border-inline-end: transparent !important;
+  background-color: var(--color-surface) !important;
+  height: 80%;
+  overflow-y: auto; 
+  margin-bottom: 15px;
+  color: var(--color-text) !important;
+}
+
+:where(.css-dev-only-do-not-override-oc1rc0).ant-menu-light .ant-menu-item, :where(.css-dev-only-do-not-override-oc1rc0).ant-menu-light>.ant-menu .ant-menu-item, :where(.css-dev-only-do-not-override-oc1rc0).ant-menu-light .ant-menu-submenu-title, :where(.css-dev-only-do-not-override-oc1rc0).ant-menu-light>.ant-menu .ant-menu-submenu-title{
+  color: var(--color-text) !important;
+}
+
+.ant-menu-item-selected{
+  background-color: var(--color-surface-light) !important;
+  color: var(--color-text) !important;
+}
+
+.ant-menu-item, .ant-menu-item-icon{
+  font-size: 15px !important;
+}
+
+.sidebar-menu .ant-menu-item:active {
+  background: rgba(0, 191, 255, 0.18) !important;
+  color: var(--color-primary) !important;
+}

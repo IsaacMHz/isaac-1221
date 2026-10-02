@@ -14,9 +14,9 @@
       rgba(0, 100, 255, 0.12),
       transparent 30%
     ),
-    #050914;
+    var(--color-background);
 
-  color: #ffffff;
+  color: var(--color-text);
 }
 
 /* HERO */
@@ -93,7 +93,7 @@
 }
 
 .auth__brand-icon {
-  color: #00bfff;
+  color: var(--color-primary);
   font-size: 26px;
 
   text-shadow:
@@ -114,7 +114,7 @@
 .auth__eyebrow {
   margin-bottom: 16px;
 
-  color: #00bfff;
+  color: var(--color-primary);
 
   font-size: 12px;
   font-weight: 700;
@@ -130,7 +130,7 @@
 }
 
 .auth__hero h1 span {
-  color: #00bfff;
+  color: var(--color-primary);
 
   text-shadow:
     0 0 30px rgba(0, 191, 255, 0.25);
@@ -196,7 +196,7 @@
 }
 
 .auth__feature > span {
-  color: #00bfff;
+  color: var(--color-primary);
 
   font-size: 22px;
 }
@@ -270,10 +270,10 @@
   background: linear-gradient(
     135deg,
     #008cff,
-    #00bfff
+    var(--color-primary)
   );
 
-  color: #ffffff;
+  color: var(--color-text);
 
   box-shadow:
     0 4px 18px rgba(0, 174, 255, 0.2);
@@ -284,7 +284,7 @@
 .auth__heading h2 {
   margin: 0 0 8px;
 
-  color: #ffffff;
+  color: var(--color-text);
 
   font-size: 30px;
   letter-spacing: -1px;
@@ -319,12 +319,12 @@
 
   background: #0b1423;
 
-  color: #ffffff;
+  color: var(--color-text);
 }
 
 .auth__panel-content .ant-input-affix-wrapper input {
   background: transparent;
-  color: #ffffff;
+  color: var(--color-text);
 }
 
 .auth__panel-content .ant-input::placeholder,
@@ -339,7 +339,7 @@
 
 .auth__panel-content
   .ant-input-affix-wrapper:focus-within {
-  border-color: #00bfff;
+  border-color: var(--color-primary);
 
   box-shadow:
     0 0 0 2px rgba(0, 191, 255, 0.1);
@@ -368,7 +368,7 @@
 }
 
 .auth__options input {
-  accent-color: #00bfff;
+  accent-color: var(--color-primary);
 }
 
 .auth__options button {
@@ -376,7 +376,7 @@
 
   background: transparent;
 
-  color: #00bfff;
+  color: var(--color-primary);
 
   font-size: 12px;
 
