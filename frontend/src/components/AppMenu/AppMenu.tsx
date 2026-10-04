@@ -1,7 +1,9 @@
-import { Menu } from "antd";
+import { LogoutOutlined } from "@ant-design/icons";
+import { Button, Menu } from "antd";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import { privateRoutes } from "../../config/routesConfig";
+import { clearSession } from "../../utils/authStorage";
 
 import "./AppMenu.css";
 
@@ -17,14 +19,30 @@ const AppMenu = () => {
       label: route.label,
     }));
 
+  const handleLogout = () => {
+    clearSession();
+    navigate("/auth");
+  };
+
   return (
-    <Menu
-      mode="inline"
-      selectedKeys={[location.pathname]}
-      items={menuItems}
-      onClick={({ key }) => navigate(key)}
-      className="sidebar-menu"
-    />
+    <div className="app-menu">
+      <Menu
+        mode="inline"
+        selectedKeys={[location.pathname]}
+        items={menuItems}
+        onClick={({ key }) => navigate(key)}
+        className="sidebar-menu"
+      />
+
+      <Button
+        type="text"
+        icon={<LogoutOutlined />}
+        className="app-menu__logout"
+        onClick={handleLogout}
+      >
+        Cerrar sesión
+      </Button>
+    </div>
   );
 };
 
