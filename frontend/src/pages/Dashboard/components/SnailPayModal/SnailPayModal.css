@@ -1,0 +1,290 @@
+/* SnailPay Modal */
+
+.snailpay-modal .ant-modal-mask {
+  background: rgba(2, 8, 20, 0.78) !important;
+  backdrop-filter: blur(3px);
+}
+
+
+/* Modal */
+
+.snailpay-modal .ant-modal-container,
+.snailpay-modal .ant-modal-content {
+  background:
+    radial-gradient(
+      circle at 100% 0%,
+      rgba(0, 191, 255, 0.12),
+      transparent 32%
+    ),
+    linear-gradient(
+      135deg,
+      #0a1d35 0%,
+      #071326 100%
+    ) !important;
+
+  border: 1px solid rgba(0, 191, 255, 0.28) !important;
+  border-radius: var(--radius-lg) !important;
+
+  box-shadow:
+    0 24px 70px rgba(0, 0, 0, 0.55),
+    0 0 35px rgba(0, 191, 255, 0.08);
+}
+
+
+/* Header */
+
+.snailpay-modal .ant-modal-header {
+  margin: 0 !important;
+  padding: 20px 24px !important;
+
+  background: transparent !important;
+
+  border-bottom: 1px solid var(--color-border) !important;
+}
+
+.snailpay-modal .ant-modal-title {
+  color: var(--color-text) !important;
+}
+
+.snailpay-modal__title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  color: var(--color-text) !important;
+
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.snailpay-modal__title .anticon {
+  color: var(--color-primary) !important;
+
+  font-size: 18px;
+}
+
+
+/* Close */
+
+.snailpay-modal .ant-modal-close {
+  top: 17px;
+  right: 18px;
+
+  color: var(--color-text-secondary) !important;
+}
+
+.snailpay-modal .ant-modal-close:hover {
+  color: var(--color-primary) !important;
+
+  background: rgba(0, 191, 255, 0.08) !important;
+}
+
+
+/* Body */
+
+.snailpay-modal .ant-modal-body {
+  padding: 24px !important;
+
+  background: transparent !important;
+}
+
+.snailpay-modal__description {
+  margin-bottom: 22px;
+
+  color: var(--color-text-secondary);
+
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+
+/* Form */
+
+.snailpay-modal .ant-form-item {
+  margin-bottom: 18px;
+}
+
+.snailpay-modal .ant-form-item-label {
+  padding-bottom: 6px !important;
+}
+
+.snailpay-modal .ant-form-item-label > label {
+  color: var(--color-text-secondary) !important;
+
+  font-size: 12px;
+  font-weight: 500;
+}
+
+
+/* Inputs */
+
+.snailpay-modal .ant-input,
+.snailpay-modal .ant-input-affix-wrapper,
+.snailpay-modal .ant-input-number {
+  color: var(--color-text) !important;
+
+  background: rgba(5, 9, 20, 0.75) !important;
+
+  border: 1px solid var(--color-border) !important;
+  border-radius: var(--radius-sm) !important;
+
+  box-shadow: none !important;
+}
+
+
+/* Inputs normales */
+
+.snailpay-modal .ant-input {
+  height: 42px;
+}
+
+
+/* Input Password */
+
+.snailpay-modal .ant-input-affix-wrapper {
+  width: 100%;
+  height: 42px;
+
+  padding: 0 11px;
+}
+
+
+/* Input interno del Password */
+
+.snailpay-modal .ant-input-affix-wrapper .ant-input {
+  height: auto;
+
+  padding: 0;
+
+  background: transparent !important;
+
+  border: none !important;
+  border-radius: 0 !important;
+
+  box-shadow: none !important;
+}
+
+
+/* Placeholder */
+
+.snailpay-modal .ant-input::placeholder,
+.snailpay-modal .ant-input-number-input::placeholder {
+  color: #5f6b82 !important;
+}
+
+
+/* Focus */
+
+.snailpay-modal .ant-input:focus,
+.snailpay-modal .ant-input-focused,
+.snailpay-modal .ant-input-affix-wrapper:focus,
+.snailpay-modal .ant-input-affix-wrapper-focused,
+.snailpay-modal .ant-input-number:focus,
+.snailpay-modal .ant-input-number-focused {
+  border-color: var(--color-primary) !important;
+
+  box-shadow:
+    0 0 0 2px rgba(0, 191, 255, 0.12) !important;
+}
+
+
+/* Evita doble focus en input interno */
+
+.snailpay-modal .ant-input-affix-wrapper .ant-input:focus {
+  box-shadow: none !important;
+}
+
+
+/* Password */
+
+.snailpay-modal .ant-input-password-icon {
+  color: var(--color-text-secondary) !important;
+}
+
+.snailpay-modal .ant-input-password-icon:hover {
+  color: var(--color-primary) !important;
+}
+
+
+/* Input Number */
+
+.snailpay-modal .ant-input-number {
+  width: 100%;
+  height: 42px;
+}
+
+.snailpay-modal .ant-input-number-input {
+  height: 40px;
+
+  color: var(--color-text) !important;
+}
+
+.snailpay-modal .ant-input-number-prefix {
+  color: var(--color-primary) !important;
+}
+
+
+/* Validations */
+
+.snailpay-modal .ant-form-item-explain-error {
+  color: var(--color-error) !important;
+
+  font-size: 11px;
+}
+
+
+/* Footer */
+
+.snailpay-modal .ant-modal-footer {
+  margin: 0 !important;
+
+  padding: 18px 24px !important;
+
+  background: rgba(5, 9, 20, 0.25) !important;
+
+  border-top: 1px solid var(--color-border) !important;
+}
+
+
+/* Cancelar */
+
+.snailpay-modal .ant-modal-footer .ant-btn-default {
+  height: 40px;
+
+  color: var(--color-text-secondary) !important;
+
+  background: transparent !important;
+
+  border-color: var(--color-border) !important;
+}
+
+.snailpay-modal .ant-modal-footer .ant-btn-default:hover {
+  color: var(--color-text) !important;
+
+  background: var(--color-surface-light) !important;
+
+  border-color: var(--color-primary) !important;
+}
+
+
+/* Recargar */
+
+.snailpay-modal .ant-modal-footer .ant-btn-primary {
+  height: 40px;
+
+  color: var(--color-background) !important;
+
+  background: var(--color-primary) !important;
+
+  border-color: var(--color-primary) !important;
+
+  font-weight: 600;
+}
+
+.snailpay-modal .ant-modal-footer .ant-btn-primary:hover {
+  color: #ffffff !important;
+
+  background: var(--color-primary-dark) !important;
+
+  border-color: var(--color-primary-dark) !important;
+}

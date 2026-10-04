@@ -20,6 +20,8 @@ import {
 } from "recharts";
 
 import "./Dashboard.css";
+import { useState } from "react";
+import SnailPayModal from "./components/SnailPayModal/SnailPayModal";
 
 const bettingData = [
   {
@@ -60,6 +62,7 @@ const snailWinsData = [
 ];
 
 const Dashboard = () => {
+  const [snailPayOpen, setSnailPayOpen] = useState(false);
   return (
     <div className="dashboard">
       <header className="dashboard__header">
@@ -78,7 +81,7 @@ const Dashboard = () => {
             <strong>$1,250.00</strong>
           </div>
 
-          <Button type="primary" icon={<PlusOutlined />}>
+          <Button type="primary" icon={<PlusOutlined />} onClick={() => setSnailPayOpen(true)}>
             Recargar
           </Button>
         </Card>
@@ -336,6 +339,12 @@ const Dashboard = () => {
           </div>
         </Card>
       </section>
+
+      <SnailPayModal
+        open={snailPayOpen}
+        onClose={() => setSnailPayOpen(false)}
+      />
+
     </div>
   );
 };
