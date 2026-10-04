@@ -1,10 +1,11 @@
 import { Button, Form, Input, message } from "antd";
 import { useNavigate } from "react-router-dom";
 
-import { register } from "../../../../services/authService";
+import { useAuth } from "../../../../context/AuthContext";
 
 const RegisterForm = () => {
   const navigate = useNavigate();
+  const { register } = useAuth();
 
   const handleRegister = async (values: {
     fullName: string;

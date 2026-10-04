@@ -2,8 +2,10 @@ import { BellOutlined, DownOutlined, UserOutlined } from "@ant-design/icons";
 import { Avatar, Button } from "antd";
 
 import "./AppNavbar.css";
+import { useAuth } from "../../context/AuthContext";
 
 const AppNavbar = () => {
+  const { user } = useAuth();
   return (
     <header className="app-navbar">
       <div className="app-navbar__content">
@@ -23,8 +25,8 @@ const AppNavbar = () => {
           />
 
           <div className="app-navbar__user-info">
-            <strong>Isaac Montiel</strong>
-            <span>isaac@email.com</span>
+            <strong>{user?.fullName}</strong>
+            <span>{user?.email}</span>
           </div>
 
           <DownOutlined className="app-navbar__user-arrow" />

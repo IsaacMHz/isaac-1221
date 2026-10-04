@@ -22,6 +22,7 @@ import {
 import "./Dashboard.css";
 import { useState } from "react";
 import SnailPayModal from "./components/SnailPayModal/SnailPayModal";
+import { useAuth } from "../../context/AuthContext";
 
 const bettingData = [
   {
@@ -63,12 +64,13 @@ const snailWinsData = [
 
 const Dashboard = () => {
   const [snailPayOpen, setSnailPayOpen] = useState(false);
+  const { user } = useAuth();
   return (
     <div className="dashboard">
       <header className="dashboard__header">
         <div>
           <h1>
-            Hola, Isaac <span>👋</span>
+            Hola, {user?.fullName} <span>👋</span>
           </h1>
 
           <p>¿Listo para la próxima carrera?</p>
@@ -78,7 +80,7 @@ const Dashboard = () => {
           <div className="dashboard__balance-info">
             <span>Saldo disponible</span>
 
-            <strong>$1,250.00</strong>
+            <strong>${user?.balance?.toFixed(2)}</strong>
           </div>
 
           <Button type="primary" icon={<PlusOutlined />} onClick={() => setSnailPayOpen(true)}>

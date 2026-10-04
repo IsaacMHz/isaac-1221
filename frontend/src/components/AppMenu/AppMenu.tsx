@@ -2,14 +2,16 @@ import { LogoutOutlined } from "@ant-design/icons";
 import { Button, Menu } from "antd";
 import { useLocation, useNavigate } from "react-router-dom";
 
+import { useAuth } from "../../context/AuthContext";
 import { privateRoutes } from "../../config/routesConfig";
-import { clearSession } from "../../utils/authStorage";
 
 import "./AppMenu.css";
 
 const AppMenu = () => {
   const navigate = useNavigate();
   const location = useLocation();
+
+  const { logout } = useAuth();
 
   const menuItems = privateRoutes
     .filter((route) => route.label)
@@ -20,7 +22,7 @@ const AppMenu = () => {
     }));
 
   const handleLogout = () => {
-    clearSession();
+    logout();
     navigate("/auth");
   };
 

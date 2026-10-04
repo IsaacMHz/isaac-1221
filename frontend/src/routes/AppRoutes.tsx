@@ -3,7 +3,6 @@ import {
   Navigate,
   Route,
   Routes,
-  useLocation,
 } from "react-router-dom";
 
 import {
@@ -12,56 +11,44 @@ import {
 } from "../config/routesConfig";
 
 import AppLayout from "../layouts/AppLayout/AppLayout";
-import { getSession } from "../utils/authStorage";
+import { useAuth } from "../context/AuthContext";
 
-const AppRouteTree = () => {
-  const location = useLocation();
-  void location;
-
-  const session = getSession();
-
-  const isAuthenticated =
-    session?.isAuthenticated === true;
+const AppRoutes = () => {
+  const { isAuthenticated } = useAuth();
 
   return (
-    <Routes>
-      {isAuthenticated ? (
-        <Route element={<AppLayout />}>
-          {privateRoutes.map((route) => (
+    <BrowserRouter>
+      <Routes>
+        {isAuthenticated ? (
+          <Route element={<AppLayout />}>
+            {privateRoutes.map((route) => (
+              <Route
+                key={route.path}
+                path={route.path}
+                element={route.element}
+              />
+            ))}
+          </Route>
+        ) : (
+          publicRoutes.map((route) => (
             <Route
               key={route.path}
               path={route.path}
               element={route.element}
             />
-          ))}
-        </Route>
-      ) : (
-        publicRoutes.map((route) => (
-          <Route
-            key={route.path}
-            path={route.path}
-            element={route.element}
-          />
-        ))
-      )}
+          ))
+        )}
 
-      <Route
-        path="*"
-        element={
-          <Navigate
-            to={isAuthenticated ? "/dashboard" : "/auth"}
-            replace
-          />
-        }
-      />
-    </Routes>
-  );
-};
-
-const AppRoutes = () => {
-  return (
-    <BrowserRouter>
-      <AppRouteTree />
+        <Route
+          path="*"
+          element={
+            <Navigate
+              to={isAuthenticated ? "/dashboard" : "/auth"}
+              replace
+            />
+          }
+        />
+      </Routes>
     </BrowserRouter>
   );
 };
