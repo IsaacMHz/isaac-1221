@@ -1,17 +1,17 @@
-import express from "express"
+import express from "express";
 
-const app = express()
-const PORT = 3000
+import snailPayRoutes from "./routes/snailPay.routes.js";
 
-app.use(express.json())
+const app = express();
 
-app.get("/api/health", (_req, res) => {
-  res.json({
-    status: "ok",
-    message: "SnailRaces API funcionando",
-  })
-})
+const PORT = 3000;
+
+app.use(express.json());
+
+app.use("/api/snailpay", snailPayRoutes);
 
 app.listen(PORT, () => {
-  console.log(`Servidor ejecutándose en http://localhost:${PORT}`)
-})
+  console.log(
+    `Servidor ejecutándose en http://localhost:${PORT}`,
+  );
+});
