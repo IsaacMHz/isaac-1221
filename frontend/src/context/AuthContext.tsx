@@ -16,6 +16,7 @@ import {
   clearSession,
   getSession,
   getUser,
+  saveUser,
 } from "../utils/authStorage";
 
 interface RegisterData {
@@ -35,6 +36,7 @@ interface AuthContextValue {
   register: (data: RegisterData) => Promise<void>;
   login: (data: LoginData) => Promise<void>;
   logout: () => void;
+  updateBalance: (amount: number) => void;
 }
 
 interface AuthProviderProps {
@@ -90,6 +92,28 @@ const AuthProvider = ({
     setUser(loggedUser);
   };
 
+  const updateBalance = (amount: number): void => {
+    const storedUser = getUser();
+
+    if (!storedUser) {
+      return;
+    }
+
+    const updatedUser = {
+      ...storedUser,
+      balance: storedUser.balance + amount,
+    };
+
+    saveUser(updatedUser);
+
+    setUser({
+      id: updatedUser.id,
+      fullName: updatedUser.fullName,
+      email: updatedUser.email,
+      balance: updatedUser.balance,
+    });
+  };
+
   const logout = (): void => {
     clearSession();
     setUser(null);
@@ -101,6 +125,7 @@ const AuthProvider = ({
     register,
     login,
     logout,
+    updateBalance,
   };
 
   return (

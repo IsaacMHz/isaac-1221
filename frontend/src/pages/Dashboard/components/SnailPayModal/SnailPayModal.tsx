@@ -1,5 +1,23 @@
 import { CreditCardOutlined } from "@ant-design/icons";
-import { Form, Input, InputNumber, Modal, Row, Col } from "antd";
+import {
+  Col,
+  Form,
+  Input,
+  InputNumber,
+  Modal,
+  Row,
+  message,
+} from "antd";
+import { useState } from "react";
+
+import { useAuth } from "../../../../context/AuthContext";
+import { rechargeBalance } from "../../../../services/snailPayService";
+
+import {
+  getPaymentData,
+  savePaymentData,
+} from "../../../../utils/paymentStorage";
+
 import "./SnailPayModal.css";
 
 interface SnailPayModalProps {
@@ -12,16 +30,71 @@ const SnailPayModal = ({
   onClose,
 }: SnailPayModalProps) => {
   const [form] = Form.useForm();
+  const [loading, setLoading] = useState(false);
+
+  const { user, updateBalance } = useAuth();
 
   const handleSubmit = async () => {
     try {
       const values = await form.validateFields();
 
-      console.log("Datos SnailPay:", values);
-    } catch {
-      // Validaciones del formulario.
+      if (!user) {
+        message.error("No hay un usuario autenticado");
+        return;
+      }
+
+      setLoading(true);
+
+      const response = await rechargeBalance({
+        userId: user.id,
+        payerEmail: user.email,
+        cardNumber: values.cardNumber,
+        expiration: values.expiration,
+        cvv: values.cvv,
+        fullName: values.fullName,
+        amount: Number(values.amount),
+      });
+
+      if (
+        response.status === "success" &&
+        response.code === 200 &&
+        response.data.status === "approved"
+      ) {
+        updateBalance(
+          response.data.transaction_amount,
+        );
+
+        savePaymentData({
+          cardNumber: values.cardNumber,
+          expiration: values.expiration,
+          cvv: values.cvv,
+          fullName: values.fullName,
+        });
+
+        message.success(response.message);
+
+        form.resetFields();
+        onClose();
+
+        return;
+      }
+
+      message.error(response.message);
+    } catch (error) {
+      if (error instanceof Error) {
+        message.error(error.message);
+        return;
+      }
+
+      message.error(
+        "No fue posible procesar la recarga",
+      );
+    } finally {
+      setLoading(false);
     }
   };
+
+  const savedPaymentData = getPaymentData();
 
   return (
     <Modal
@@ -37,6 +110,7 @@ const SnailPayModal = ({
       onOk={handleSubmit}
       okText="Recargar"
       cancelText="Cancelar"
+      confirmLoading={loading}
       centered
       width={500}
       destroyOnHidden
@@ -45,6 +119,7 @@ const SnailPayModal = ({
         form={form}
         layout="vertical"
         requiredMark={false}
+        initialValues={savedPaymentData ?? undefined}
       >
         <Form.Item
           label="Número de tarjeta"
@@ -52,7 +127,8 @@ const SnailPayModal = ({
           rules={[
             {
               required: true,
-              message: "Ingresa el número de tarjeta",
+              message:
+                "Ingresa el número de tarjeta",
             },
           ]}
         >
@@ -118,7 +194,7 @@ const SnailPayModal = ({
           ]}
         >
           <InputNumber
-            style={{ width: "100%" }}
+            className="snailpay-modal__amount"
             min={1}
             prefix="$"
             placeholder="0.00"
