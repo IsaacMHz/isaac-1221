@@ -290,3 +290,23 @@ Al registrar una cuenta nueva:
 - Se crea el nuevo usuario.
 - El balance inicia nuevamente en $0.00.
 - Se eliminan los datos de pago guardados anteriormente.
+
+## Variables de entorno
+
+El proyecto utiliza variables de entorno para configurar la comunicación entre el frontend y el backend.
+
+### Frontend
+
+Crear el archivo `frontend/.env`:
+
+```env
+VITE_API_URL=http://localhost:3000
+```
+
+### Backend
+
+El backend utiliza las siguientes variables de entorno:
+
+- `PORT`: define el puerto en el que se ejecuta el servidor. Si no se proporciona, utiliza `3000`. En Render, la plataforma proporciona automáticamente este valor.
+
+- `FRONTEND_URL`: define el origen permitido por CORS. Si no se proporciona, utiliza `http://localhost:5173` como valor predeterminado.
