@@ -1,23 +1,23 @@
 import express from "express";
+import cors from "cors";
 
 import snailPayRoutes from "./routes/snailPay.routes.js";
-import cors from "cors";
 
 const app = express();
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: process.env.FRONTEND_URL || "http://localhost:5173",
   }),
 );
 
 app.use("/api/snailpay", snailPayRoutes);
 
-app.listen(PORT, () => {
+app.listen(Number(PORT), "0.0.0.0", () => {
   console.log(
     `Servidor ejecutándose en http://localhost:${PORT}`,
   );
