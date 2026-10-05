@@ -28,10 +28,8 @@
 
 /* Texto de los elementos */
 
-:where(.css-dev-only-do-not-override-oc1rc0).ant-menu-light .ant-menu-item,
-:where(.css-dev-only-do-not-override-oc1rc0).ant-menu-light > .ant-menu .ant-menu-item,
-:where(.css-dev-only-do-not-override-oc1rc0).ant-menu-light .ant-menu-submenu-title,
-:where(.css-dev-only-do-not-override-oc1rc0).ant-menu-light > .ant-menu .ant-menu-submenu-title {
+.sidebar-menu.ant-menu-light .ant-menu-item,
+.sidebar-menu.ant-menu-light .ant-menu-submenu-title {
   color: var(--color-text) !important;
 }
 

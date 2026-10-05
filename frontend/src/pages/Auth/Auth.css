@@ -345,7 +345,8 @@
     0 0 0 2px rgba(0, 191, 255, 0.1);
 }
 
-:where(.css-dev-only-do-not-override-oc1rc0).ant-input-outlined.ant-input-status-error:not(.ant-input-disabled){
+.auth__panel-content
+  .ant-input-outlined.ant-input-status-error:not(.ant-input-disabled) {
   background: var(--color-background) !important;
 }
 
