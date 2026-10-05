@@ -349,44 +349,6 @@
   background: var(--color-background) !important;
 }
 
-/* OPTIONS */
-
-.auth__options {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  margin: -5px 0 20px;
-
-  font-size: 12px;
-}
-
-.auth__options label {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-
-  color: #7e8aa0;
-
-  cursor: pointer;
-}
-
-.auth__options input {
-  accent-color: var(--color-primary);
-}
-
-.auth__options button {
-  border: none;
-
-  background: transparent;
-
-  color: var(--color-primary);
-
-  font-size: 12px;
-
-  cursor: pointer;
-}
-
 /* SUBMIT */
 
 .auth__submit {

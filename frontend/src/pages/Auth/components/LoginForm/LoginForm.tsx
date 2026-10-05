@@ -78,13 +78,6 @@ const LoginForm = () => {
           <Input.Password placeholder="••••••••" />
         </Form.Item>
 
-        <div className="auth__options">
-          <label>
-            <input type="checkbox" />
-            <span>Recordarme</span>
-          </label>
-        </div>
-
         <Button
           type="primary"
           htmlType="submit"
