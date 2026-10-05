@@ -2,15 +2,42 @@ export const apiClient = async <T>(
   url: string,
   options?: RequestInit,
 ): Promise<T> => {
-  const response = await fetch(url, options);
+  const controller = new AbortController();
 
-  const data = (await response.json()) as T;
+  const timeoutId = setTimeout(() => {
+    controller.abort();
+  }, 3000);
 
-  if (!response.ok) {
-    throw new Error(
-      "Ocurrió un error al procesar la solicitud",
-    );
+  try {
+    const response = await fetch(url, {
+      ...options,
+      signal: controller.signal,
+    });
+
+    const data = (await response.json()) as T & {
+      message?: string;
+    };
+
+    if (!response.ok) {
+      throw new Error(
+        data.message ??
+          "No fue posible procesar la solicitud.",
+      );
+    }
+
+    return data;
+  } catch (error) {
+    if (
+      error instanceof DOMException &&
+      error.name === "AbortError"
+    ) {
+      throw new Error(
+        "SnailPay tardó demasiado en responder. No se realizó ninguna recarga. Intenta nuevamente.",
+      );
+    }
+
+    throw error;
+  } finally {
+    clearTimeout(timeoutId);
   }
-
-  return data;
 };

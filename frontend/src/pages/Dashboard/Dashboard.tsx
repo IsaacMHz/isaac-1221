@@ -102,13 +102,13 @@ const Dashboard = () => {
 
         <Col xs={24} sm={12} lg={6}>
           <Card className="dashboard__stat-card">
-            <Statistic title="Tus apuestas" value={5} prefix={<CheckCircleOutlined />} />
+            <Statistic title="Tus apuestas" value={5} prefix={<DollarOutlined />} />
           </Card>
         </Col>
 
         <Col xs={24} sm={12} lg={6}>
           <Card className="dashboard__stat-card">
-            <Statistic title="Ganadas" value={3} prefix={<DollarOutlined />} />
+            <Statistic title="Ganadas" value={3} prefix={<CheckCircleOutlined />} />
           </Card>
         </Col>
 
