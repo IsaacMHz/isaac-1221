@@ -23,6 +23,7 @@ import "./Dashboard.css";
 import { useState } from "react";
 import SnailPayModal from "./components/SnailPayModal/SnailPayModal";
 import { useAuth } from "../../context/AuthContext";
+import { formatCurrency } from "../../utils/formatCurrency";
 
 const bettingData = [
   {
@@ -80,7 +81,7 @@ const Dashboard = () => {
           <div className="dashboard__balance-info">
             <span>Saldo disponible</span>
 
-            <strong>${user?.balance?.toFixed(2)}</strong>
+            <strong>{formatCurrency(user?.balance ?? 0)}</strong>
           </div>
 
           <Button type="primary" icon={<PlusOutlined />} onClick={() => setSnailPayOpen(true)}>
