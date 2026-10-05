@@ -4,21 +4,22 @@ import { rechargeBalance } from "../services/snailPay.service.js";
 import { createApiResponse } from "../utils/apiResponse.js";
 import type { SnailPayRechargeRequest } from "../types/snailPay.types.js";
 
-export const recharge = (
+export const recharge = async (
   req: Request,
   res: Response,
-): void => {
+): Promise<void> => {
   try {
-    const data = req.body as SnailPayRechargeRequest;
+    const data =
+      req.body as SnailPayRechargeRequest;
 
-    const response = rechargeBalance(data);
+    const response = await rechargeBalance(data);
 
     if (response.status === "approved") {
       res.status(200).json(
         createApiResponse(
           "success",
           200,
-          "Cobro aprobado correctamente",
+          "La recarga fue aprobada correctamente.",
           response,
         ),
       );
@@ -31,7 +32,7 @@ export const recharge = (
         createApiResponse(
           "error",
           200,
-          "La transacción fue rechazada",
+          response.status_detail,
           response,
         ),
       );
@@ -43,7 +44,7 @@ export const recharge = (
       createApiResponse(
         "error",
         500,
-        "SnailPay no pudo procesar la operación",
+        response.status_detail,
         response,
       ),
     );
@@ -52,7 +53,7 @@ export const recharge = (
       createApiResponse(
         "error",
         500,
-        "Error al procesar la solicitud de SnailPay",
+        "No fue posible comunicarse con SnailPay. Intenta nuevamente.",
         null,
       ),
     );
