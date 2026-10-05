@@ -3,10 +3,16 @@ import {
   saveSession,
   saveUser,
 } from "../utils/authStorage";
+
+import {
+  clearPaymentData,
+} from "../utils/paymentStorage";
+
 import {
   hashPassword,
   verifyPassword,
 } from "../utils/password";
+
 import type {
   AuthSession,
   PublicUser,
@@ -30,12 +36,20 @@ const generateSalt = (): string => {
   crypto.getRandomValues(bytes);
 
   return Array.from(bytes)
-    .map((byte) => byte.toString(16).padStart(2, "0"))
+    .map((byte) =>
+      byte.toString(16).padStart(2, "0"),
+    )
     .join("");
 };
 
-const toPublicUser = (user: User): PublicUser => {
-  const { passwordHash, passwordSalt, ...publicUser } = user;
+const toPublicUser = (
+  user: User,
+): PublicUser => {
+  const {
+    passwordHash,
+    passwordSalt,
+    ...publicUser
+  } = user;
 
   return publicUser;
 };
@@ -48,7 +62,10 @@ export const register = async (
   const email = data.email.trim().toLowerCase();
   const fullName = data.fullName.trim();
 
-  if (existingUser && existingUser.email === email) {
+  if (
+    existingUser &&
+    existingUser.email === email
+  ) {
     throw new Error(
       "El correo electrónico ya está registrado",
     );
@@ -78,6 +95,8 @@ export const register = async (
   };
 
   saveSession(session);
+
+  clearPaymentData();
 
   return toPublicUser(user);
 };
