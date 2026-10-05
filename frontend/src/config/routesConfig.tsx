@@ -10,6 +10,7 @@ import {
 
 import Auth from "../pages/Auth/Auth";
 import Dashboard from "../pages/Dashboard/Dashboard";
+import ComingSoon from "../pages/ComingSoon/ComingSoon";
 
 export interface AppRoute {
   path: string;
@@ -34,25 +35,33 @@ export const privateRoutes: AppRoute[] = [
   },
   {
     path: "/races",
-    element: <h1>Carreras</h1>,
+    element: (
+      <ComingSoon icon={<TrophyOutlined />} />
+    ),
     label: "Carreras",
     icon: <TrophyOutlined />,
   },
   {
     path: "/top-up",
-    element: <h1>Recargar saldo</h1>,
+    element: (
+      <ComingSoon icon={<CreditCardOutlined />} />
+    ),
     label: "Recargar saldo",
     icon: <CreditCardOutlined />,
   },
   {
     path: "/history",
-    element: <h1>Historial</h1>,
+    element: (
+      <ComingSoon icon={<BarChartOutlined />} />
+    ),
     label: "Historial",
     icon: <BarChartOutlined />,
   },
   {
     path: "/profile",
-    element: <h1>Perfil</h1>,
+    element: (
+      <ComingSoon icon={<UserOutlined />} />
+    ),
     label: "Perfil",
     icon: <UserOutlined />,
   },

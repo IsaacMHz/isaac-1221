@@ -24,6 +24,7 @@ import { useState } from "react";
 import SnailPayModal from "./components/SnailPayModal/SnailPayModal";
 import { useAuth } from "../../context/AuthContext";
 import { formatCurrency } from "../../utils/formatCurrency";
+import { useNavigate } from "react-router-dom";
 
 const bettingData = [
   {
@@ -66,6 +67,7 @@ const snailWinsData = [
 const Dashboard = () => {
   const [snailPayOpen, setSnailPayOpen] = useState(false);
   const { user } = useAuth();
+  const navigate = useNavigate();
   return (
     <div className="dashboard">
       <header className="dashboard__header">
@@ -145,7 +147,10 @@ const Dashboard = () => {
                   <span>En progreso</span>
                 </div>
 
-                <Button type="primary">
+                <Button
+                  type="primary"
+                  onClick={() => navigate("/races")}
+                >
                   Ver carrera →
                 </Button>
               </div>
@@ -238,7 +243,10 @@ const Dashboard = () => {
             <p>Consulta las próximas carreras disponibles</p>
           </div>
 
-          <button type="button">
+          <button
+            type="button"
+            onClick={() => navigate("/races")}
+          >
             Ver todas →
           </button>
         </div>
