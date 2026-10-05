@@ -7,6 +7,7 @@ import {
   Modal,
   Row,
   message,
+  type InputNumberProps,
 } from "antd";
 import { useState } from "react";
 
@@ -25,16 +26,60 @@ interface SnailPayModalProps {
   onClose: () => void;
 }
 
+interface SnailPayFormValues {
+  cardNumber: string;
+  expiration: string;
+  cvv: string;
+  fullName: string;
+  amount: number;
+}
+
 const SnailPayModal = ({
   open,
   onClose,
 }: SnailPayModalProps) => {
-  const [form] = Form.useForm();
+  const [form] = Form.useForm<SnailPayFormValues>();
   const [loading, setLoading] = useState(false);
 
   const { user, updateBalance } = useAuth();
 
-  const handleSubmit = async () => {
+  const savedPaymentData = getPaymentData();
+
+  const formatter: InputNumberProps<number>["formatter"] = (
+    value,
+  ) => {
+    const numericValue = `${value ?? ""}`;
+
+    const [start, end] = numericValue.split(".");
+
+    const formattedStart = start.replace(
+      /\B(?=(\d{3})+(?!\d))/g,
+      ",",
+    );
+
+    return `$ ${end
+      ? `${formattedStart}.${end}`
+      : formattedStart
+      }`;
+  };
+
+  const handleCancel = (): void => {
+    form.resetFields();
+
+    if (savedPaymentData) {
+      form.setFieldsValue({
+        cardNumber: savedPaymentData.cardNumber,
+        expiration: savedPaymentData.expiration,
+        cvv: savedPaymentData.cvv,
+        fullName: savedPaymentData.fullName,
+        amount: undefined,
+      });
+    }
+
+    onClose();
+  };
+
+  const handleSubmit = async (): Promise<void> => {
     try {
       const values = await form.validateFields();
 
@@ -94,8 +139,6 @@ const SnailPayModal = ({
     }
   };
 
-  const savedPaymentData = getPaymentData();
-
   return (
     <Modal
       rootClassName="snailpay-modal"
@@ -106,7 +149,7 @@ const SnailPayModal = ({
         </div>
       }
       open={open}
-      onCancel={onClose}
+      onCancel={handleCancel}
       onOk={handleSubmit}
       okText="Recargar"
       cancelText="Cancelar"
@@ -130,9 +173,28 @@ const SnailPayModal = ({
               message:
                 "Ingresa el número de tarjeta",
             },
+            {
+              len: 16,
+              message:
+                "El número de tarjeta debe tener 16 dígitos",
+            },
           ]}
         >
-          <Input placeholder="1234 1234 1234 1234" />
+          <Input
+            placeholder="1234 1234 1234 1234"
+            maxLength={16}
+            inputMode="numeric"
+            onChange={(event) => {
+              const value = event.target.value
+                .replace(/\D/g, "")
+                .slice(0, 16);
+
+              form.setFieldValue(
+                "cardNumber",
+                value,
+              );
+            }}
+          />
         </Form.Item>
 
         <Row gutter={16}>
@@ -145,9 +207,39 @@ const SnailPayModal = ({
                   required: true,
                   message: "Ingresa el vencimiento",
                 },
+                {
+                  pattern:
+                    /^(0[1-9]|1[0-2])\/\d{2}$/,
+                  message:
+                    "Ingresa un vencimiento válido",
+                },
               ]}
             >
-              <Input placeholder="MM/AA" />
+              <Input
+                placeholder="MM/YY"
+                maxLength={5}
+                inputMode="numeric"
+                onChange={(event) => {
+                  const digits =
+                    event.target.value
+                      .replace(/\D/g, "")
+                      .slice(0, 4);
+
+                  let formattedValue = digits;
+
+                  if (digits.length > 2) {
+                    formattedValue = `${digits.slice(
+                      0,
+                      2,
+                    )}/${digits.slice(2)}`;
+                  }
+
+                  form.setFieldValue(
+                    "expiration",
+                    formattedValue,
+                  );
+                }}
+              />
             </Form.Item>
           </Col>
 
@@ -160,11 +252,28 @@ const SnailPayModal = ({
                   required: true,
                   message: "Ingresa el CVV",
                 },
+                {
+                  len: 3,
+                  message:
+                    "El CVV debe tener 3 dígitos",
+                },
               ]}
             >
               <Input.Password
                 placeholder="123"
                 maxLength={3}
+                inputMode="numeric"
+                onChange={(event) => {
+                  const value =
+                    event.target.value
+                      .replace(/\D/g, "")
+                      .slice(0, 3);
+
+                  form.setFieldValue(
+                    "cvv",
+                    value,
+                  );
+                }}
               />
             </Form.Item>
           </Col>
@@ -176,7 +285,8 @@ const SnailPayModal = ({
           rules={[
             {
               required: true,
-              message: "Ingresa el nombre completo",
+              message:
+                "Ingresa el nombre completo",
             },
           ]}
         >
@@ -193,11 +303,40 @@ const SnailPayModal = ({
             },
           ]}
         >
-          <InputNumber
-            className="snailpay-modal__amount"
+          <InputNumber<number>
             min={1}
-            prefix="$"
             placeholder="0.00"
+            className="snailpay-modal__amount"
+            formatter={formatter}
+            parser={(value) => {
+              const sanitizedValue =
+                value?.replace(/[^\d.]/g, "") ?? "";
+
+              return Number(sanitizedValue) || 0;
+            }}
+            onKeyDown={(event) => {
+              const allowedKeys = [
+                "Backspace",
+                "Delete",
+                "Tab",
+                "ArrowLeft",
+                "ArrowRight",
+                "Home",
+                "End",
+              ];
+
+              if (
+                allowedKeys.includes(event.key) ||
+                event.ctrlKey ||
+                event.metaKey
+              ) {
+                return;
+              }
+
+              if (!/[\d.]/.test(event.key)) {
+                event.preventDefault();
+              }
+            }}
           />
         </Form.Item>
       </Form>
